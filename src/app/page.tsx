@@ -4,6 +4,7 @@ import { useState } from 'react';
 import DashboardLayout from "@/components/DashboardLayout";
 import StatsOverview from "@/components/dashboard/StatsOverview";
 import ChatWorkspace from "@/components/dashboard/ChatWorkspace";
+import BlogDetail from "@/components/dashboard/BlogDetail";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -67,6 +68,8 @@ export default function Home() {
             <p className="text-white/30 text-sm max-w-sm text-center">Adjust AI response temperament, confidence thresholds, and emotion detection sensitivity here.</p>
           </div>
         );
+      case 'resources':
+        return <BlogDetail />;
       default:
         return <StatsOverview />;
     }
