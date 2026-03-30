@@ -1,16 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
 
 :root {
-  --primary: 215 100% 60%; /* Vibrant Azure */
-  --primary-glow: 215 100% 60% / 0.3;
-  --secondary: 260 100% 70%; /* Soft Violet */
-  --secondary-glow: 260 100% 70% / 0.3;
-  --background: 230 25% 4%; /* Deep Space Black */
+  /* Ultra-Premium SaaS Palette */
+  --background: 231 40% 3%; /* Deep Obsidian */
   --foreground: 210 40% 98%;
-  --card: 230 25% 7%;
-  --card-border: 230 25% 15%;
-  --accent: 190 100% 50%; /* Cyan Neon */
-  --radius: 1.25rem;
+  
+  --primary: 217 91% 60%; /* Electric Azure */
+  --primary-glow: 217 91% 60% / 0.25;
+  
+  --secondary: 270 91% 65%; /* Cyber Violet */
+  --secondary-glow: 270 91% 65% / 0.2;
+  
+  --accent: 185 100% 50%; /* Neon Cyan */
+  --accent-glow: 185 100% 50% / 0.3;
+
+  --card: 231 40% 6%;
+  --card-border: 231 40% 12%;
+  
+  --muted: 215 25% 40%;
+  --muted-foreground: 215 20% 65%;
+  
+  --radius: 1.5rem;
+  --sidebar-width: 280px;
 }
 
 * {
@@ -20,173 +31,141 @@
 }
 
 body {
-  background: 
-    radial-gradient(circle at 0% 0%, hsl(var(--primary) / 0.15) 0%, transparent 50%),
-    radial-gradient(circle at 100% 100%, hsl(var(--secondary) / 0.1) 0%, transparent 50%),
-    hsl(var(--background));
+  background-color: hsl(var(--background));
   color: hsl(var(--foreground));
   font-family: 'Outfit', sans-serif;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
-  line-height: 1.6;
-  letter-spacing: 0.015em;
-  overflow-x: hidden;
+  letter-spacing: -0.01em;
+  overflow: hidden; /* Dashboard scroll handled in main area */
+}
+
+/* 12-Column Grid System */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.5rem;
 }
 
 /* Premium Mesh Background */
 .mesh-bg {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   z-index: -1;
-  opacity: 0.4;
-  filter: blur(100px);
-  pointer-events: none;
+  background: 
+    radial-gradient(circle at 0% 0%, hsl(var(--primary) / 0.12) 0%, transparent 40%),
+    radial-gradient(circle at 100% 100%, hsl(var(--secondary) / 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 50% 50%, hsl(var(--accent) / 0.03) 0%, transparent 40%);
+  filter: blur(80px);
 }
 
-.mesh-circle-1 {
-  position: absolute;
-  top: -10%;
-  right: -5%;
-  width: 60vw;
-  height: 60vw;
-  background: hsl(var(--primary) / 0.2);
-  border-radius: 50%;
-  animation: float 20s infinite alternate;
-}
-
-.mesh-circle-2 {
-  position: absolute;
-  bottom: -15%;
-  left: -5%;
-  width: 50vw;
-  height: 50vw;
-  background: hsl(var(--secondary) / 0.15);
-  border-radius: 50%;
-  animation: float 25s infinite alternate-reverse;
-}
-
-@keyframes float {
-  0% { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(5%, 5%) scale(1.1); }
-}
-
-.glass-card {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+/* Glassmorphism Refined */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: var(--radius);
-  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-  box-shadow: 
-    0 10px 40px -10px rgba(0, 0, 0, 0.5),
-    0 0 20px -5px hsl(var(--primary) / 0.1);
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-.glass-card:hover {
+.glass-panel:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.8);
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.875rem 1.25rem;
+  border-radius: 1rem;
+  color: hsl(var(--muted-foreground));
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.sidebar-item:hover, .sidebar-item.active {
   background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.15);
-  transform: translateY(-8px) scale(1.005);
-  box-shadow: 
-    0 20px 60px -15px rgba(0, 0, 0, 0.6),
-    0 0 30px -5px hsl(var(--primary) / 0.2);
+  color: white;
+  transform: translateX(4px);
 }
 
-.gradient-text {
-  background: linear-gradient(135deg, #fff 20%, hsl(var(--primary)) 60%, hsl(var(--secondary)) 100%);
+.sidebar-item.active {
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Premium Navigation */
+.nav-link {
+  color: hsl(var(--muted-foreground));
+  transition: color 0.3s;
+}
+
+.nav-link:hover {
+  color: white;
+}
+
+/* Custom Scrollbar for Dashboard */
+.custom-scroll::-webkit-scrollbar {
+  width: 5px;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Animations */
+@keyframes pulse-soft {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 2s infinite ease-in-out;
+}
+
+/* Glow Effects */
+.glow-primary {
+  box-shadow: 0 0 20px -5px hsl(var(--primary) / 0.4);
+}
+
+.glow-accent {
+  box-shadow: 0 0 20px -5px hsl(var(--accent) / 0.5);
+}
+
+/* Typography Enhancements */
+.gradient-text-pro {
+  background: linear-gradient(135deg, #fff 10%, hsl(var(--primary)) 50%, hsl(var(--secondary)) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 30px hsl(var(--primary) / 0.3));
+  filter: drop-shadow(0 0 40px hsl(var(--primary) / 0.2));
 }
 
-.btn-primary {
-  background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
-  color: white;
-  padding: 1rem 2.5rem;
-  border-radius: calc(var(--radius) / 1.5);
-  border: none;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
+.stat-value {
+  font-size: 2.25rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  font-size: 0.85rem;
-  position: relative;
-  overflow: hidden;
-}
-
-.btn-primary::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: 0.5s;
-}
-
-.btn-primary:hover::before {
-  left: 100%;
-}
-
-.btn-primary:hover {
-  transform: scale(1.05) translateY(-2px);
-  box-shadow: 0 15px 30px -10px hsl(var(--primary) / 0.5);
-}
-
-.chat-input {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: white;
-  padding: 1.5rem;
-  border-radius: var(--radius);
-  width: 100%;
-  outline: none;
-  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-  font-size: 1.1rem;
-}
-
-.chat-input:focus {
-  border-color: hsl(var(--primary));
-  background: rgba(255, 255, 255, 0.07);
-  box-shadow: 0 0 0 4px hsl(var(--primary) / 0.15);
-}
-
-.message-user {
-  background: linear-gradient(135deg, hsl(var(--primary) / 0.3), hsl(var(--primary) / 0.15));
-  border: 1px solid hsl(var(--primary) / 0.2);
-  align-self: flex-end;
-  border-top-left-radius: 1.5rem;
-  border-top-right-radius: 1.5rem;
-  border-bottom-left-radius: 1.5rem;
-  border-bottom-right-radius: 0.3rem;
-  padding: 1.25rem 1.75rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.message-ai {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  align-self: flex-start;
-  border-top-left-radius: 1.5rem;
-  border-top-right-radius: 1.5rem;
-  border-bottom-right-radius: 1.5rem;
-  border-bottom-left-radius: 0.3rem;
-  padding: 1.25rem 1.75rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-.scroll-hide::-webkit-scrollbar {
-  display: none;
-}
-.scroll-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  color: hsl(var(--muted-foreground));
 }
