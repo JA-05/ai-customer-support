@@ -5,9 +5,12 @@ import DashboardLayout from "@/components/DashboardLayout";
 import StatsOverview from "@/components/dashboard/StatsOverview";
 import ChatWorkspace from "@/components/dashboard/ChatWorkspace";
 import BlogDetail from "@/components/dashboard/BlogDetail";
+import AnimeBackground from "@/components/landing/AnimeBackground";
+import LandingHero from "@/components/landing/LandingHero";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState('dashboard');
+  const [showDashboard, setShowDashboard] = useState(false);
 
   const renderContent = () => {
     switch (activeTab) {
@@ -74,6 +77,15 @@ export default function Home() {
         return <StatsOverview />;
     }
   };
+
+  if (!showDashboard) {
+    return (
+      <main className="min-h-screen relative">
+        <AnimeBackground />
+        <LandingHero onEnterDashboard={() => setShowDashboard(true)} />
+      </main>
+    );
+  }
 
   return (
     <DashboardLayout activeTab={activeTab} setActiveTab={setActiveTab}>
