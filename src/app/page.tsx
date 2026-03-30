@@ -2,28 +2,33 @@ import ChatInterface from "@/components/ChatInterface";
 
 export default function Home() {
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center p-8 lg:p-24 relative overflow-hidden">
-      {/* Decorative Blur Elements */}
-      <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-[-10%] left-[-10%] w-[400px] h-[400px] bg-purple-600/10 rounded-full blur-[100px] pointer-events-none" />
+    <main className="min-h-screen flex flex-col items-center justify-center p-6 lg:p-24 relative overflow-hidden">
+      {/* Premium Mesh Background */}
+      <div className="mesh-bg">
+        <div className="mesh-circle-1" />
+        <div className="mesh-circle-2" />
+      </div>
 
-      <div className="z-10 w-full max-w-5xl flex flex-col gap-20">
-        <header className="text-center space-y-8">
-          <h1 className="text-6xl lg:text-8xl font-extrabold tracking-tighter">
-            <span className="gradient-text">Nexus</span> Support AI
+      <div className="z-10 w-full max-w-6xl flex flex-col gap-16 lg:gap-24">
+        <header className="text-center space-y-6 lg:space-y-10 animate-in fade-in slide-in-from-top-10 duration-1000">
+          <div className="inline-block px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-[10px] uppercase tracking-[0.3em] font-bold text-blue-400 mb-6 backdrop-blur-md">
+            Next-Gen AI Ecosystem
+          </div>
+          <h1 className="text-6xl lg:text-9xl font-extrabold tracking-tighter leading-[0.9]">
+            <span className="gradient-text">Nexus</span> <br className="hidden lg:block" /> Support AI
           </h1>
-          <p className="text-white/50 text-xl lg:text-2xl max-w-3xl mx-auto leading-relaxed">
-            Experience the future of customer relations with our advanced AI-driven support ecosystem. 
-            Real-time, intelligent, and designed for absolute excellence.
+          <p className="text-white/60 text-lg lg:text-2xl max-w-2xl mx-auto leading-relaxed font-light">
+            Elevate your customer experience with ultra-intelligent, 
+            real-time support architecture.
           </p>
         </header>
 
-        <div className="grid grid-cols-1 gap-12 items-start py-8">
+        <div className="grid grid-cols-1 gap-12 items-start py-4 animate-in fade-in zoom-in-95 duration-1000 delay-300">
           <ChatInterface />
         </div>
 
-        <footer className="pt-12 text-center text-white/20 text-sm tracking-widest uppercase">
-          &copy; 2026 Nexus AI Systems. All rights reserved.
+        <footer className="pt-12 text-center text-white/10 text-[10px] tracking-[0.4em] uppercase font-medium">
+          &copy; 2026 Nexus AI Systems &bull; Defined by Excellence
         </footer>
       </div>
     </main>
